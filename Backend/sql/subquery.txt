@@ -1,0 +1,206 @@
+SQL> select *
+  2  from emp
+  3  where sal>(select sal
+  4  from emp
+  5  where ename='Scott');
+
+no rows selected
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select *
+  2  from emp
+  3  where sal>(select sal
+  4  from emp
+  5* where ename='SCOTT')
+SQL> 
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select *
+  2  from emp
+  3  where sal>=(select sal
+  4  from emp
+  5* where ename='SCOTT')
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select dname
+  2  from dept
+  3  where deptno=(select deptno
+  4  from emp
+  5  where sal>(select sal
+  6  from emp
+  7* where ename='SCOTT')
+  8  
+SQL> /
+where deptno=(select deptno
+              *
+ERROR at line 3:
+ORA-00921: unexpected end of SQL command 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select dname
+  2  from dept
+  3  where deptno=(select deptno
+  4  from emp
+  5  where sal>(select sal
+  6  from emp
+  7* where ename='SCOTT'))
+SQL> /
+
+DNAME                                                                           
+--------------                                                                  
+ACCOUNTING                                                                      
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select dname
+  2  from dept
+  3  where deptno=(select deptno
+  4                from emp
+  5                where sal>(select sal
+  6                            from emp
+  7*                           where ename='SCOTT'))
+SQL> /
+
+DNAME                                                                           
+--------------                                                                  
+ACCOUNTING                                                                      
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select max(sal)
+  2  from emp
+  3  where sal<(select max(sal)
+  4                from emp
+  5                where sal>(select max(sal)
+  6*                           from emp))
+SQL> /
+
+  MAX(SAL)                                                                      
+----------                                                                      
+                                                                                
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select max(sal)
+  2  from emp
+  3  where sal<(select max(sal)
+  4                from emp
+  5                where sal<(select max(sal)
+  6*                           from emp))
+SQL> /
+
+  MAX(SAL)                                                                      
+----------                                                                      
+      2975                                                                      
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select sal
+  2  from emp
+  3  where rownum=7
+  4* order by sal desc
+  5  /
+
+no rows selected
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select sal
+  2  from emp
+  3  order by sal desc
+  4* where rownum=7
+  5  
+SQL> /
+where rownum=7
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select sal
+  2  from emp
+  3  order by sal desc
+  4* limit =7
+SQL> /
+limit =7
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select sal
+  2  from emp
+  3  order by sal desc
+  4* limit 7,1
+SQL> /
+limit 7,1
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select sal
+  2  from emp
+  3  order by sal desc
+  4* rownum<=7
+SQL> /
+rownum<=7
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  select sal
+  2  from emp
+  3* where sal
+SQL> spool off
