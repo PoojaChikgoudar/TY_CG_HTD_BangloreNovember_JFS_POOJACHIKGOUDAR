@@ -1,0 +1,9 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		int a1[]= {20,10,5,40,60};
+
+	}
+
+}

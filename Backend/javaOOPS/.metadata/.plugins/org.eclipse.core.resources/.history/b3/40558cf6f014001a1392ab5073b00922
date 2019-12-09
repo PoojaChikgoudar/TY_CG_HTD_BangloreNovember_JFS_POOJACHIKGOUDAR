@@ -1,0 +1,16 @@
+package com.capgemini.thread.Creatingthread;
+
+public class User1 extends Thread{
+	PVR p1;
+	public User1(PVR p1) {
+		super();
+		this.p1 = p1;
+	}
+	public void run() {
+		p1.confirmTicket();
+		
+	}
+
+
+	
+}

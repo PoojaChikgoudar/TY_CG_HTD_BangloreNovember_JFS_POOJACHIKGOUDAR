@@ -1,0 +1,5 @@
+package com.capgemini.dsa.algorithms;
+
+public class LinearSearch {
+
+}

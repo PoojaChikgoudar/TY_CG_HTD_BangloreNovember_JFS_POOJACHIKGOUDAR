@@ -1,0 +1,22 @@
+package com.capgemini.dsa.algorithms;
+
+public class AlgoAnalysis {
+
+	public static void main(String[] args) {
+	 long num=9999999999999L;
+	 System.out.println(addUpto(num));
+	 System.out.println(addUptoQuick(num));
+
+	}
+	public static long addUpto(Long num) {
+		long total=0L;
+		for(long i=0;i<=num;i++) {
+			total=total+i;
+			
+		}
+		return total;
+	}
+public static long appUptoQuick(long num) {
+	return num*(num+1)/2;
+}
+}

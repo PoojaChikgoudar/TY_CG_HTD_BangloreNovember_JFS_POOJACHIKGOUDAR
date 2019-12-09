@@ -1,0 +1,19 @@
+package com.capgemini.dsa.algorithms;
+
+public class AlgoAnalysis {
+
+	public static void main(String[] args) {
+	 long num=9999999999999L;
+	 System.out.println(addupto(num));
+
+	}
+	public static long addUpto(long num) {
+		long total=0L;
+		for(long i=0;i<=num;i++) {
+			total=total+i;
+			
+		}
+		return total;
+	}
+
+}
