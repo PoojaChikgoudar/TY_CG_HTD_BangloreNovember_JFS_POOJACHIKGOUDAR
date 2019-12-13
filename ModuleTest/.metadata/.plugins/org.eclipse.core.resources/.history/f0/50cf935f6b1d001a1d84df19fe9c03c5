@@ -1,0 +1,64 @@
+package com.capgemini.appdevelopment.dao;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.sql.DriverManager;
+import java.util.List;
+import java.util.Properties;
+
+import com.capgemini.appdevelopment.bean.Contact;
+import com.mysql.jdbc.Connection;
+
+public class ContactDAOImpl implements ContactDAO {
+	FileReader reader;
+	Properties prop;
+	public ContactDAOImpl() {
+		try {
+			reader=new FileReader("driverclass");
+			prop=new Properties();
+			prop.load(reader);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+
+	@Override
+	public List<Contact> getAllContact() {
+		
+			List<Contact> list=new ArrayList<Contact>();
+			try(Connection con=DriverManager.getConnection(prop.getProperty("dburl"),
+					prop.getProperty("dbUser"),prop.getProperty("dbpassword"));
+					Statement stmt=con.createStatement();
+					ResultSet rs=stmt.executeQuery(prop.getProperty("query1"))){
+				while(rs.next())	{
+					 user=new UserBean();
+					 user.setUser_id(rs.getInt(1));
+					 user.setUsername(rs.getString(2));
+					 user.setUsermail(rs.getString(3));
+					 list.add(user);
+				}
+				return list;
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		return null;
+	}
+
+	@Override
+	public boolean search(String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean performOperation() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

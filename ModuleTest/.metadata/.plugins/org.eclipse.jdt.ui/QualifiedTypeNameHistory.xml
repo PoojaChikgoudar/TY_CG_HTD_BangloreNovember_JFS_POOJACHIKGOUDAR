@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.capgemini.appdevelopment.bean.Contact"/>
+<fullyQualifiedTypeName name="com.capgemini.appdevelopment.dao.ContactDAO"/>
+<fullyQualifiedTypeName name="com.capgemini.appdevelopment.dao.ContactDAOImpl"/>
+<fullyQualifiedTypeName name="com.capgemini.appdevelopment.service.ContactService"/>
+<fullyQualifiedTypeName name="com.capgemini.appdevelopment.service.ContactServiceImpl"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,14 @@
+package com.capgemini.appdevelopment.service;
+
+import java.util.List;
+
+import com.capgemini.appdevelopment.bean.Contact;
+
+public interface ContactService {
+	public  List<Contact> getAllContact();
+	public boolean search(String name);
+	public boolean performOperation();
+	
+
+
+}

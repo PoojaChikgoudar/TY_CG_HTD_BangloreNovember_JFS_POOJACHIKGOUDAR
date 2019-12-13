@@ -1,0 +1,27 @@
+package com.capgemini.appdevelopment.dao;
+
+import java.util.List;
+
+import com.capgemini.appdevelopment.bean.Contact;
+
+public class ContactDAOImpl implements ContactDAO {
+
+	@Override
+	public List<Contact> getAllContact() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean search(String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean performOperation() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

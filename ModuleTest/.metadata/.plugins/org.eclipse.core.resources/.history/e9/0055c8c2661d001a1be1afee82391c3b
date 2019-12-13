@@ -1,0 +1,5 @@
+package com.capgemini.appdevelopment.service;
+
+public class ContactService {
+
+}

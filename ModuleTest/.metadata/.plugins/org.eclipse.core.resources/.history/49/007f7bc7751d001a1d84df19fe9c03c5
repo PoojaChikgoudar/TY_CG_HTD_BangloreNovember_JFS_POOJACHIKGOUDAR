@@ -1,0 +1,38 @@
+package com.capgemini.appdevelopment.service;
+
+import java.util.List;
+
+import com.capgemini.appdevelopment.bean.Contact;
+import com.capgemini.appdevelopment.dao.ContactDAO;
+import com.capgemini.appdevelopment.factory.ContactDAOManager;
+
+public class ContactServiceImpl implements ContactService {
+	 ContactDAO dao=ContactDAOManager.instanceOfContactDAOImpl();
+
+	@Override
+	public List<Contact> getAllContact() {
+		// TODO Auto-generated method stub
+		return dao.getAllContact();
+	}
+
+	@Override
+	public boolean insertUser(Contact contact) {
+		// TODO Auto-generated method stub
+		return dao.insertUser(contact);
+	}
+
+	@Override
+	public boolean deleteUser(String name) {
+		// TODO Auto-generated method stub
+		return dao.deleteUser(name);
+	}
+
+	@Override
+	public boolean updateUser(String name, Contact contact) {
+		// TODO Auto-generated method stub
+		return dao.updateUser(name, contact);
+	}
+
+	
+
+}

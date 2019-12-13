@@ -1,0 +1,6 @@
+driverclass=com.mysql.jdbc.Driver
+dburl="jdbc:mysql://localhost:3306/contactfile"
+dbuser=root
+dbpassword=root
+query1=select * from contact
+insertquery=insert into contact values(?,?,?)

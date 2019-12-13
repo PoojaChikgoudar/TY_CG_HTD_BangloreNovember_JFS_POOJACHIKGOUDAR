@@ -1,0 +1,4 @@
+driverclass=com.mysql.jdbc.Driver
+dbuser=root
+dbpassword=root
+query1=select * from contact
