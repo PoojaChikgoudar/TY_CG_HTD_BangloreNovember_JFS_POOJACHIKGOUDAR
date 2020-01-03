@@ -1,0 +1,72 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.Scanner;
+
+import com.capgemini.forestmanagement.dao.AdminDAO;
+import com.capgemini.forestmanagement.dao.ClientDAO;
+import com.capgemini.forestmanagement.dao.CustomerDAO;
+import com.capgemini.forestmanagement.dao.InvalidCredentailException;
+import com.capgemini.forestmanagement.factory.AdminManager;
+import com.capgemini.forestmanagement.factory.ClientManager;
+import com.capgemini.forestmanagement.factory.CustomerDAOManager;
+import com.capgemini.forestrymanagement.bean.AdminBean;
+import com.capgemini.forestrymanagement.bean.CustomerBean;
+
+public class AdminMain {
+
+	//private static final CustomerDAO CustomerManager = null;
+
+	public static void main() {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("Enter the choice");
+			System.out.println("1.Admin");
+			System.out.println("2.client");
+			System.out.println("3.scheduler");
+			System.out.println("4.Land");
+		int choice=sc.nextInt();
+		switch(choice) {
+		case 1:AdminDAO dao=AdminManager.getAdminDAO();
+		System.out.println("*****Admin Login******");
+		System.out.println("Enter the username");
+		String username=sc.next();
+		System.out.println("Enter the password");
+		String password=sc.next();
+			boolean check;
+			try {
+				check = dao.adminLogin(username,password);
+				if(check) {
+				Home.main();
+				}
+				else {
+					System.out.println("");
+				}
+			} catch (InvalidCredentailException e) {
+				
+				e.printStackTrace();
+			}
+		
+		break;
+		
+		case 2:ClientDAO client=ClientManager.getClientDAO();
+		CustomerBean beans=new CustomerBean();
+		System.out.println("Customer Login");
+		System.out.println("Enter the customerName");
+		String name=sc.next();
+		System.out.println("Enter the customer password");
+		String password1=sc.next();
+		boolean check1=client.clientLogin(name, password1);
+		if(check1) {
+			System.out.println("Login sucesssfull");
+			ClientHome.main();
+		}
+		else {
+			System.out.println("Invalid login");
+		}
+		break;
+		}
+		}
+	}
+
+}

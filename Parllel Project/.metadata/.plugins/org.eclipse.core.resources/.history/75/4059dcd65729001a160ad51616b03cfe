@@ -1,0 +1,97 @@
+package com.capgemini.jdbc.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.jdbc.bean.ClientBean;
+import com.capgemini.jdbc.bean.ProductBean;
+import com.capgemini.jdbc.factory.ClientManager;
+import com.capgemini.jdbc.factory.ProductDAOManager;
+import com.mysql.jdbc.services.ClientService;
+import com.mysql.jdbc.services.ProductService;
+
+public class ClientMain {
+
+	public static void main() {
+		// TODO Auto-generated method stub
+		ClientService service=ClientManager.instanceOfClientService();
+		 ClientBean user=new ClientBean();
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("1.List all clientdetails");
+			System.out.println("2.insert client details");
+			System.out.println("3.delete client details");
+			System.out.println("4.update client details");
+			System.out.println("5.home");
+
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+				  List<ClientBean> list=service.getAllClients();
+				  if(list!=null) {
+					  for(ClientBean bean:list) {
+						  System.out.println(bean);
+					  }
+				  }
+				break;
+			
+			case 2:
+				ClientBean bean=new ClientBean();
+			System.out.println("enter client id");
+			int clientId=sc.nextInt();
+			System.out.println("enter client name");
+			String clientName=sc.next();
+			System.out.println("enter client password");
+			String password=sc.next();
+			
+			bean.setClientid(clientId);
+			bean.setClientName(clientName);
+			bean.setPassword(password);
+			
+			boolean check=service.add(bean);
+			if(check==true) {
+				System.out.println("client added to list");
+			}
+			else {
+
+				System.out.println("client id is repeated");
+			}
+			break;
+			
+			
+			case 3:System.out.println("Enter the clientid to delete");
+			int clientid=sc.nextInt();
+			
+			boolean check1=service.delete(clientid);
+			if(check1) {
+				System.out.println(" client Deleted..");
+			}
+			else {
+				System.out.println("Enter the correct clientid");
+			}
+			break;
+			case 4:System.out.println("enter the clientid");
+			int id1=sc.nextInt();
+			ClientBean bean1=new ClientBean();
+		    System.out.println("enter name to be modified");
+			bean1.setClientName(sc.next());
+			System.out.println("enter the password");
+			bean1.setPassword(sc.next());
+			
+			
+			boolean check2=service.modify(id1,bean1);
+			if(check2) {
+				System.out.println("modified..");
+			}
+			else {
+				System.out.println("clientid not present!Enter the correct clientid");
+			}
+			break;
+			case 5:Home.main();
+			     break;
+			}
+		}
+
+	}
+
+}

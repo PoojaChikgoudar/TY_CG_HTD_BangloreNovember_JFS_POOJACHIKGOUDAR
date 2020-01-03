@@ -1,0 +1,31 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.Scanner;
+
+import com.capgemini.forestmanagement.dao.LandDAO;
+import com.capgemini.forestmanagement.dao.ProductDAO;
+import com.capgemini.forestmanagement.factory.LandFactory;
+import com.capgemini.forestmanagement.factory.ProductDAOManager;
+
+public class LandMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		LandDAO dao=LandFactory.getLandDAO();
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("1.insert land details");
+			System.out.println("2.search land");
+			System.out.println("3.get land details");
+			System.out.println("4.delete land");
+			System.out.println("5.Modify");
+			System.out.println("6.home");
+
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+			}
+
+	}
+
+}

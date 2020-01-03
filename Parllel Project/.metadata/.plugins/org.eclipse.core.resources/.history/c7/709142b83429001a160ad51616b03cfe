@@ -1,0 +1,55 @@
+package com.capgemini.forestmanagement.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.capgemini.forestrymanagement.bean.ContractBean;
+import com.capgemini.forestrymanagement.bean.CustomerBean;
+
+
+
+public class ContractDAOImpl implements ContractDAO {
+	List<ContractBean> beans=new ArrayList<ContractBean>();
+
+	
+	
+	@Override
+	public boolean addContract(ContractBean bean) {
+		for(ContractBean contractbean:beans) {
+			if(contractbean.getContractNo()==bean.getContractNo())
+			{
+				return false;
+			}
+		}
+		beans.add(bean);
+		return true;
+		
+	}
+	@Override
+	public boolean deleteContract(int contractNo) {
+		for(ContractBean contractbean:beans) {
+        	ContractBean bean=null;
+			if(contractbean.getContractNo()==contractNo) {
+       			bean=contractbean;
+				
+			}
+
+		if(bean!=null) {
+			beans.remove(bean);
+			return true;
+			}
+		}
+		
+		return false;
+
+	
+	}
+	@Override
+	public List<ContractBean> getAllContracts() {
+		
+		return beans;
+	}
+	
+}
+
+

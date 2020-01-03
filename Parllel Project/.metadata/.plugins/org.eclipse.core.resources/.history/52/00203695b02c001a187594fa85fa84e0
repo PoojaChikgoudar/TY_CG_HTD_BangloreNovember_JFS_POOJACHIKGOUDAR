@@ -1,0 +1,31 @@
+package com.capgemini.hybernet.dto;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+@Data
+@Entity
+@Table
+public class Customer {
+	@Column
+	@Id
+	private int customerId;
+	@Column
+	private String customerName;
+	@Column
+	private String streetAdress1;
+	@Column
+	private String streetAdress2;
+	@Column
+	private String town;
+	@Column
+	private int postalCode;
+	@Column
+	private String email;
+	@Column
+	private long telephoneNumber;
+
+}

@@ -1,0 +1,40 @@
+package com.capgemini.jdbc.bean;
+
+public class LandBean {
+	private int landId;
+	private int landCost;
+	private String landlocation;
+	private String landOwner;
+	public String getLandOwner() {
+		return landOwner;
+	}
+	public void setLandOwner(String landOwner) {
+		this.landOwner = landOwner;
+	}
+	public int getLandId() {
+		return landId;
+	}
+	public void setLandId(int landId) {
+		this.landId = landId;
+	}
+	public int getLandCost() {
+		return landCost;
+	}
+	public void setLandCost(int landCost) {
+		this.landCost = landCost;
+	}
+	@Override
+	public String toString() {
+		return "LandBean [landId=" + landId + ", landCost=" + landCost + ", landlocation=" + landlocation
+				+ ", landOwner=" + landOwner + "]";
+	}
+	public String getLandlocation() {
+		return landlocation;
+	}
+	public void setLandlocation(String landlocation) {
+		this.landlocation = landlocation;
+	}
+	
+
+
+}

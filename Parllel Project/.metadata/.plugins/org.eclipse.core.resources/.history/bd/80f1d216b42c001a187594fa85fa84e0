@@ -1,0 +1,13 @@
+package com.capgemini.hybernet.dao;
+
+import java.util.List;
+
+import com.capgemini.hybernet.dto.Customer;
+
+
+public interface CustomerDao {
+	public List<Customer> getAllCustomers();
+	public boolean add(Customer user);
+    public boolean modify(int customerId,Customer bean);
+	public boolean deleteUser(int customerId);
+}

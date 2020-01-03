@@ -1,0 +1,63 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.Scanner;
+
+import com.capgemini.forestmanagement.dao.AdminDAO;
+import com.capgemini.forestmanagement.dao.CustomerDAO;
+import com.capgemini.forestmanagement.factory.AdminManager;
+import com.capgemini.forestmanagement.factory.CustomerDAOManager;
+import com.capgemini.forestrymanagement.bean.AdminBean;
+import com.capgemini.forestrymanagement.bean.CustomerBean;
+
+public class AdminMain {
+
+	//private static final CustomerDAO CustomerManager = null;
+
+	public static void main() {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("Enter the choice");
+			System.out.println("1.Admin");
+			System.out.println("2.client");
+			System.out.println("3.scheduler");
+			System.out.println("4.Land");
+		int choice=sc.nextInt();
+		switch(choice) {
+		case 1:AdminDAO dao=AdminManager.getAdminDAO();
+		
+		System.out.println("Enter the username");
+		String username=sc.next();
+		System.out.println("Enter the password");
+		String password=sc.next();
+		boolean check=dao.adminLogin(username,password);
+		if(check) {
+			System.out.println("Admin login sucessfull..");
+			Home.main();
+		}
+		else {
+			System.out.println("Invalid credentials..");
+		}
+		break;
+		
+		case 2:CustomerDAO cust=CustomerDAOManager.getForestDAO();
+		CustomerBean beans=new CustomerBean();
+		System.out.println("Customer Login");
+		System.out.println("Enter the customerid");
+		int id=sc.nextInt();
+		System.out.println("Enter the customer name");
+		String name=sc.next();
+		boolean check1=cust.customerLogin(beans);
+		if(check1) {
+			System.out.println("Login sucesssfull");
+			CustHome.main();
+		}
+		else {
+			System.out.println("Invalid login");
+		}
+		break;
+		}
+		}
+	}
+
+}

@@ -1,0 +1,33 @@
+package com.mysql.jdbc.services;
+
+import java.util.List;
+
+import com.capgemini.jdbc.bean.LandBean;
+
+public class LandServiceImpl implements LandService {
+
+	@Override
+	public List<LandBean> getAllLandDetails() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(int landId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean add(LandBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modify(int landId, LandBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

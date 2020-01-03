@@ -1,0 +1,27 @@
+package com.capgemini.forestrymanagement.bean;
+
+public class LandBean {
+	private int landId;
+	private int landValue;
+	private String landlocation;
+	public int getLandId() {
+		return landId;
+	}
+	public void setLandId(int landId) {
+		this.landId = landId;
+	}
+	public int getLandValue() {
+		return landValue;
+	}
+	public void setLandValue(int landValue) {
+		this.landValue = landValue;
+	}
+	public String getLandlocation() {
+		return landlocation;
+	}
+	public void setLandlocation(String landlocation) {
+		this.landlocation = landlocation;
+	}
+	
+
+}

@@ -1,0 +1,281 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.capgemini.forestmanagement.dao.CustomerDAO;
+import com.capgemini.forestmanagement.factory.CustomerDAOManager;
+import com.capgemini.forestrymanagement.bean.CustomerBean;
+
+public class CustomerMain {
+
+	public static void main() {
+		CustomerDAO dao=CustomerDAOManager.getForestDAO();
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("1.insert customer details");
+			System.out.println("2.search");
+			System.out.println("3.getdetails of customer");
+			System.out.println("4.delete customer details");
+			System.out.println("5.modify");
+			System.out.println("6.home");
+			System.out.println("7.AdminMain");
+
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+				CustomerBean  bean=new CustomerBean();
+
+				boolean idmatcher=false;
+				String idregexpr="^[0-9][0-9]{1,20}$";
+				boolean flag1=false;
+				while(!flag1){
+					try {
+						System.out.println("enter customer id");
+
+						System.out.println("Id should contain  numbers only..");
+						int customerId=sc.nextInt();
+						flag1=true;
+						String id1=Integer.toString(customerId);
+
+						idmatcher=id1.matches(idregexpr);
+
+						if(idmatcher) {
+							bean.setCustomerId(customerId);
+						}
+						else {
+							
+							System.out.println("Invalid customerid");
+						}
+					}catch(Exception e) {
+						sc.next();
+						System.out.println("Invalid input");
+					}	
+				}
+
+
+
+
+
+				boolean flag;
+				do {
+					String nameregexpr="^[A-Z][a-z]*";
+					System.out.println("enter customer name");
+					System.out.println("Enter the name in capitalised format");
+					String customerName=sc.next();
+					flag=customerName.matches(nameregexpr);
+					if(!flag)
+						System.out.println("Invalid...Please Enter alphabets only");
+					else {
+						bean.setCustomerName(customerName);
+					}
+				}while(!flag);
+
+				//System.out.println("Valid data");
+
+
+				boolean addmatcher;
+				do {
+					System.out.println("enter street adress1");
+					String streetAdress1=sc.next();
+
+					String regexp="^[#.0-9a-zA-Z/s,-]+$";
+
+					addmatcher=streetAdress1.matches(regexp);
+
+					if(!addmatcher) 
+						System.out.println("Invalid adress");
+
+
+					else {
+						bean.setStreetAdress1(streetAdress1);
+
+					}
+				}while(!addmatcher);
+
+
+				boolean addmatcher1;
+				do {
+					System.out.println("enter street adress2");
+					String streetAdress2=sc.next();
+
+					String regexp="^[0-9A-Za-z]*";
+
+					addmatcher1=streetAdress2.matches(regexp);
+
+					if(!addmatcher1) 
+						System.out.println("Invalid adress");
+
+
+					else {
+						bean.setStreetAdress2(streetAdress2);
+
+					}
+				}while(!addmatcher1);
+
+
+
+				boolean townmatcher;
+				do {
+					System.out.println("enter customer town");
+					String town=sc.next();
+					String townregexpr="^[A-Za-z]*";
+
+					townmatcher=town.matches(townregexpr);
+
+					if(!townmatcher) 
+						System.out.println("Invalid town name");
+
+
+					else {
+						bean.setTown(town);
+
+					}
+				}while(!townmatcher);
+
+				boolean postmatcher;
+				do {
+					System.out.println("enter postal code");
+					int postalCode=sc.nextInt();
+					String postalcode1=Integer.toString(postalCode);
+					String post1="^[1-9][0-9]{5}$";
+					//String post1="^[1-9]{1}[0-9]{2}\s{0,1}[0,9]{3}$";
+					postmatcher=postalcode1.matches(post1);
+					if(!postmatcher) 
+						System.out.println("Invalid postal code");
+
+					else {
+						bean.setPostalCode(postalCode);
+					}
+				}while(!postmatcher);
+
+
+
+
+				boolean emailmatcher;
+				do {
+					System.out.println("enter customer email");
+					String email =sc.next();
+
+					String email1="^(.+)@(.+)$";
+					emailmatcher=email.matches(email1);
+
+					if(!emailmatcher) 
+						System.out.println("Invalid Email");
+
+
+					else {
+						bean.setEmail(email);
+
+					}
+
+				}while(!emailmatcher);
+				boolean nummatcher;
+				do {
+					System.out.println("enter customer telephone");
+					long telephoneNumber=sc.nextLong();
+					String num=Long.toString(telephoneNumber);
+					//String phoneNumber="^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$";
+					String phoneNumber="^[6-9][0-9]{9}$";
+					nummatcher=num.matches(phoneNumber);
+
+					if(!nummatcher) 
+						System.out.println("Invalid number...");
+
+
+
+
+
+					else {
+						bean.setTelephoneNumber(telephoneNumber);
+
+
+					}
+				}
+				while(!nummatcher);
+
+
+
+
+
+
+				boolean check=dao.addCustomer(bean);
+				if(check) {
+					System.out.println("customer added to list");
+				}
+				else {
+
+					System.out.println("customer id is repeated");
+				}
+				break;
+
+
+
+
+			case 2:System.out.println("enter customer_id to search");	
+			int customerId3=sc.nextInt();
+
+			CustomerBean forestbean=dao.getCustomer(customerId3);
+			if(forestbean!=null) {
+
+				System.out.println(forestbean.getCustomerId());
+				System.out.println(forestbean.getCustomerName());
+				System.out.println(forestbean.getStreetAdress1());
+				System.out.println(forestbean.getStreetAdress2());
+				System.out.println(forestbean.getTown());
+				System.out.println(forestbean.getPostalCode());
+				System.out.println(forestbean.getEmail());
+				System.out.println(forestbean.getTelephoneNumber());
+
+
+			}else {
+				System.out.println("customer_id not found");
+			}
+			break;
+			case 3:
+				List<CustomerBean> forestbean3=dao.getAllCustomers();
+				if(forestbean3!=null) {
+					System.out.println(forestbean3);
+				}
+				else {
+					System.out.println("customer details not found");
+				}
+				break;
+			case 4:System.out.println("Enter the customer_id to delete");
+			int customerId1=sc.nextInt();
+			boolean check1=dao.deleteCustomer(customerId1);
+			if(check1) {
+				System.out.println("Deleted..");
+			}
+			else {
+				System.out.println("Enter the valid customer_id");
+			}
+			break;
+			case 5:CustomerBean bean2=new CustomerBean();
+			System.out.println("Enter the customerid");
+			bean2.setCustomerId(sc.nextInt());
+
+
+			if(dao.modify(bean2.getCustomerId())) {
+				System.out.println("modified..");
+			}
+			else {
+				System.out.println("enter the correct Telephonenumber");
+			}
+			break;
+			case 6:Home.main();
+			break;
+			case 7:AdminMain.main();
+			break;
+
+			}
+		}
+
+
+	}
+
+} 
+
+

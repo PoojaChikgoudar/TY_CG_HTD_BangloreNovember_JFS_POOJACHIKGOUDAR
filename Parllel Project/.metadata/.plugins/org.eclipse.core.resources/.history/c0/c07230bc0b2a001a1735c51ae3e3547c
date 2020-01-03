@@ -1,0 +1,5 @@
+package com.capgemini.hybernet.service;
+
+public class ClientServiceImpl {
+
+}

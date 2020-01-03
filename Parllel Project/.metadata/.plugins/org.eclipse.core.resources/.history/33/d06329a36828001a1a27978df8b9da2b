@@ -1,0 +1,110 @@
+package com.capgemini.forestmanagement.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+import com.capgemini.forestrymanagement.bean.ContractBean;
+import com.capgemini.forestrymanagement.bean.CustomerBean;
+import com.capgemini.forestrymanagement.bean.LandBean;
+
+public class LandDAOImpl implements LandDAO{
+	List<LandBean> beans=new ArrayList<LandBean>();
+	Scanner sc=new Scanner(System.in);
+
+	
+
+	@Override
+	public boolean add(LandBean bean) {
+		for(LandBean landbean:beans) {
+			if(landbean.getLandId()==bean.getLandId())
+			{
+				return false;
+			}
+		}
+		beans.add(bean);
+		return true;
+		
+	}
+
+
+
+	@Override
+	public List<LandBean> getAllLandDetails() {
+		// TODO Auto-generated method stub
+		return beans;
+	}
+
+
+
+	@Override
+	public boolean delete(int landId) {
+		for(LandBean landbean:beans) {
+			LandBean bean=null;
+			if(landbean.getLandId()==landId) {
+       			bean=landbean;
+				
+			}
+
+		if(bean!=null) {
+			beans.remove(bean);
+			return true;
+			}
+		}
+		
+		return false;
+	}
+
+
+
+	@Override
+	public boolean modify(int landId) {
+		for(LandBean landBean:beans) {
+			if(landBean.getLandId()==landId) {
+				
+				System.out.println("choose feild to be modified\n1.landcost\n2.landOwner\n");
+				int c=sc.nextInt();
+				switch(c) {
+				case 1:System.out.println("enter landcost to be modified");
+				landBean.setLandCost(sc.nextInt());
+				break;
+				
+				case 2:System.out.println("Enter the landowner to be modified");
+				landBean.setLandOwner(sc.next());
+				break;
+				
+				
+				default:
+					break;
+				}
+				
+				}
+				
+			
+			
+			return true;
+			
+		}
+		
+		return false;
+	}
+
+
+
+	@Override
+	public LandBean getlanddetails(int landId) {
+		for(LandBean landbean:beans) {
+			if(landbean.getLandId()==landId) {
+				return landbean;
+			}
+
+		}
+
+		return null;
+	}
+		
+
+	
+
+}

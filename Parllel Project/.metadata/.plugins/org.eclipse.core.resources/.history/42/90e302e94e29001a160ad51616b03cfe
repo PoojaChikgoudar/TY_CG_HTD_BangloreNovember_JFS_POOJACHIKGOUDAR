@@ -1,0 +1,12 @@
+package com.capgemini.jdbc.dao;
+
+public class IllegalAcessExcaetion extends Exception {
+	String msg;
+
+	public IllegalAcessExcaetion(String msg) {
+		super();
+		this.msg = msg;
+	}
+	
+
+}

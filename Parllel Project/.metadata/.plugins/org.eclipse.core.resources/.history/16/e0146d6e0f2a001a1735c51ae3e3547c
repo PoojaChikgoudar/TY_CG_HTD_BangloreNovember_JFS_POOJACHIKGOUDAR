@@ -1,0 +1,37 @@
+package com.mysql.jdbc.services;
+
+import java.util.List;
+
+import com.capgemini.jdbc.bean.ProductBean;
+
+import com.capgemini.jdbc.dao.ProductDAO;
+
+import com.capgemini.jdbc.factory.ProductDAOManager;
+
+public class ProductServiceImpl implements ProductService {
+	ProductDAO dao=ProductDAOManager.instanceOfProductDAOImpl();
+	@Override
+	public boolean add(ProductBean user) {
+		// TODO Auto-generated method stub
+		return dao.add(user);
+	}
+
+	@Override
+	public boolean modify(int productId,ProductBean bean) {
+		// TODO Auto-generated method stub
+		return dao.modify(productId,bean);
+	}
+
+	@Override
+	public boolean delete(int productId) {
+		// TODO Auto-generated method stub
+		return dao.deleteUser(productId);
+	}
+
+	@Override
+	public List<ProductBean> getAllProducts() {
+		// TODO Auto-generated method stub
+		return dao.getAllProducts();
+	}
+
+}

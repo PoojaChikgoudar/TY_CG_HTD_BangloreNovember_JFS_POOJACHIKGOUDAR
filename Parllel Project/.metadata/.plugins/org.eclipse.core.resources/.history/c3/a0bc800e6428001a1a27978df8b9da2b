@@ -1,0 +1,15 @@
+package com.capgemini.forestmanagement.dao;
+
+import java.util.List;
+
+import com.capgemini.forestrymanagement.bean.HaulierBean;
+import com.capgemini.forestrymanagement.bean.LandBean;
+
+public interface LandDAO {
+	public List<LandBean> getAllContracts();
+	public boolean deleteContract(int landId);
+	public boolean addContract(LandBean bean);
+	public boolean modify(int landId);
+	public LandBean gethaulier(int landId);
+
+}

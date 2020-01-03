@@ -1,0 +1,8 @@
+package com.capgemini.forestmanagement.dao;
+
+import com.capgemini.forestrymanagement.bean.AdminBean;
+
+public interface AdminDAO {
+	public boolean adminLogin(AdminBean bean);
+
+}

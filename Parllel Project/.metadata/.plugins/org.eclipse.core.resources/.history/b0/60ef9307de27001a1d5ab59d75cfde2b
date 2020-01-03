@@ -1,0 +1,5 @@
+package com.capgemini.forestrymanagement.bean;
+
+public class AdminBean {
+
+}

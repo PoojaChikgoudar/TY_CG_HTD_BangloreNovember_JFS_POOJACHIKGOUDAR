@@ -1,0 +1,53 @@
+package com.capgemini.jdbc.controller;
+
+import java.util.Scanner;
+
+import com.capgemini.forestManagementSystem.controller.ClientHome;
+import com.capgemini.forestmanagement.dao.ClientDAO;
+import com.capgemini.forestmanagement.factory.ClientManager;
+import com.capgemini.jdbc.bean.AdminBean;
+import com.capgemini.jdbc.factory.AdminManager;
+import com.mysql.jdbc.services.AdminService;
+
+
+
+public class AdminMain {
+
+	public static void main() {
+		// TODO Auto-generated method stub
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("*******************");
+		System.out.println("*****WELCOME to ForestryManagement!!*****");
+		System.out.println("Enter the choice");
+		System.out.println("1.admin");
+		System.out.println("2.client");
+		System.out.println("3.scheduler");
+		System.out.println("4.Land");
+		int choice=sc.nextInt();
+		switch(choice) {
+		case 1:AdminMain1.main();
+		break;
+		case 2:ClientDAO client=ClientManager.getClientDAO();
+		
+		System.out.println("Client Login");
+		System.out.println("Enter the customerName");
+		String name=sc.next();
+		System.out.println("Enter the customer password");
+		String password1=sc.next();
+		boolean check1=client.clientLogin(name, password1);
+		if(check1) {
+			System.out.println("Login sucesssfull");
+			ClientHome.main();
+		}
+		else {
+			System.out.println("Invalid login");
+		}
+		break;
+		
+		
+		}
+
+	}
+
+}

@@ -1,0 +1,115 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.forestmanagement.dao.ClientDAO;
+import com.capgemini.forestmanagement.dao.ProductDAO;
+import com.capgemini.forestmanagement.factory.ClientManager;
+import com.capgemini.forestmanagement.factory.ProductDAOManager;
+import com.capgemini.forestrymanagement.bean.ClientBean;
+import com.capgemini.forestrymanagement.bean.ProductBean;
+
+public class ClientMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ClientDAO dao=ClientManager.getClientDAO();
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("1.insert product details");
+			System.out.println("2.search product");
+			System.out.println("3.get Product details");
+			System.out.println("4.delete product");
+			System.out.println("5.Modify");
+			System.out.println("6.home");
+
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:ClientBean bean=new ClientBean();
+				boolean idmatcher;
+				do {
+				System.out.println("enter client id");
+				System.out.println("Id should contain 4 numbers..");
+				int clientId=sc.nextInt();
+				String id1=Integer.toString(clientId);
+				String idregexpr="^[1-9][0-9]{3}$";
+				idmatcher=id1.matches(idregexpr);
+				
+				if(!idmatcher) 
+					System.out.println("Invalid id");
+					
+				
+				else {
+					bean.setClientId(clientId);
+				}
+				}while(!idmatcher);
+				
+				
+				
+				boolean flag;
+				do {
+					String nameregexpr="^[A-Z][a-z]*";
+				System.out.println("enter customer name");
+				System.out.println("Enter the name in capitalised format");
+				String clientName=sc.next();
+				flag=clientName.matches(nameregexpr);
+				if(!flag)
+					System.out.println("Invalid...Please Enter alphabets only");
+				else {
+				   bean.setClientName(clientName);
+				}
+				}while(!flag);
+				break;
+			case 2:System.out.println("enter clientid to search");	
+			int clientid=sc.nextInt();
+
+			ClientBean bean1=dao.getClientDetails(clientid);
+			if(bean1!=null) {
+
+				System.out.println(bean1.getClientName());
+				System.out.println(bean1.getClientEmail());
+				
+
+
+			}else {
+				System.out.println("clientid not found");
+			}
+			break;
+			case 3:
+			List<ClientBean> bean3=dao.getAllClients();
+			if(bean3!=null) {
+				System.out.println(bean3);
+			}
+			else {
+				System.out.println("client details not found");
+			}
+			break;
+			case 4:System.out.println("Enter the clientid to delete");
+			int id1=sc.nextInt();
+			boolean check1=dao.delete(id1);
+			if(check1) {
+				System.out.println("Deleted..");
+			}
+			else {
+				System.out.println("Enter the correct clientid");
+			}
+			break;
+			case 5:System.out.println("Enter the client id");
+			int id=sc.nextInt();
+			boolean check2=dao.modify(id);
+			if(check2) {
+				System.out.println("modified..");
+			}
+			else {
+				System.out.println("clientid not present");
+			}
+			break;
+			case 6:Home.main();
+			      break;
+			}
+		}
+
+	}
+
+}

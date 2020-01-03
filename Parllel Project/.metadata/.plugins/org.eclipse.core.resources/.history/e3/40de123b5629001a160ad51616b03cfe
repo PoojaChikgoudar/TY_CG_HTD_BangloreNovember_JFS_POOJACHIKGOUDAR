@@ -1,0 +1,21 @@
+driverClass=com.mysql.jdbc.Driver
+dburl=jdbc:mysql://localhost:3306/forestry_management
+dbUser=root
+dbpassword=root
+insertQuery=insert into product values (?,?)
+deletequery=delete from product where productid=? 
+updatequery=Update product set productname=? where  productid=? 
+query1=select * from product
+adminlogin=select * from admin where name='Pooja' and password='poo123'
+insertQuery1=insert into haulier values (?,?,?,?,?)
+deletequery1=delete from haulier where haulier_id=? 
+query2=select * from haulier
+updatequery1=update haulier set haulier_name=?,adress=?,email=?,telephone=? where haulier_id=?
+insertQuery2=insert into order1 values(?,?,?,?,?)
+deletequery2=delete from order1 where orderid=? 
+query3=select * from order1
+updatequery2=update order1 set customername=?,productname=?,haulier_name=?,deliverydate=? where orderid=?
+insertLand=insert into land values(?,?,?)
+deleteLand=delete from land where landid=? 
+query4=select * from land
+updateland=update land set landlocation=?,landowner=? where landid=?

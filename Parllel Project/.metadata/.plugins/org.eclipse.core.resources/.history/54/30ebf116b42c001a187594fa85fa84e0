@@ -1,0 +1,33 @@
+package com.capgemini.hybernet.service;
+
+import java.util.List;
+
+import com.capgemini.hybernet.dao.CustomerDao;
+
+import com.capgemini.hybernet.dto.Customer;
+import com.capgemini.hybernet.factory.CustomerManager;
+
+
+public class CustomerServiceImpl implements  CustomerService {
+	CustomerDao dao=CustomerManager.instanceOfCustomerDAOImpl();
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean add(Customer user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean modify(int customerId, Customer bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean deleteUser(int customerId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

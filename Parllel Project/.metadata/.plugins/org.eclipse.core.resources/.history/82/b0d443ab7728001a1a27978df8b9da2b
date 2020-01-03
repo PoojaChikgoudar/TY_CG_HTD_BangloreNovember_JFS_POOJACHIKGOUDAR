@@ -1,0 +1,82 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.forestmanagement.dao.LandDAO;
+import com.capgemini.forestmanagement.dao.ProductDAO;
+import com.capgemini.forestmanagement.factory.LandFactory;
+import com.capgemini.forestmanagement.factory.ProductDAOManager;
+import com.capgemini.forestrymanagement.bean.LandBean;
+import com.capgemini.forestrymanagement.bean.ProductBean;
+
+public class LandMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		LandDAO dao=LandFactory.getLandDAO();
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("1.insert land details");
+			System.out.println("2.search land");
+			System.out.println("3.get land details");
+			System.out.println("4.delete land");
+			System.out.println("5.Modify");
+			System.out.println("6.home");
+
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+				break;
+			case 2:System.out.println("enter landid to search");	
+			int landId=sc.nextInt();
+
+			LandBean bean=dao.getlanddetails(landId);
+			if(bean!=null) {
+
+				System.out.println(bean.getLandCost());
+				System.out.println(bean.getLandlocation());
+				System.out.println(bean.getLandOwner());
+				
+
+
+			}else {
+				System.out.println("landid not found");
+			}
+			break;
+			case 3:
+			List<LandBean> bean3=dao.getAllLandDetails();
+			if(bean3!=null) {
+				System.out.println(bean3);
+			}
+			else {
+				System.out.println("land details not found");
+			}
+			break;
+			case 4:System.out.println("Enter the productid to delete");
+			int Id1=sc.nextInt();
+			boolean check1=dao.delete(Id1);
+			if(check1) {
+				System.out.println("Deleted..");
+			}
+			else {
+				System.out.println("Enter the correct landid");
+			}
+			break;
+			case 5:System.out.println("Enter the land id");
+			int Id6=sc.nextInt();
+			boolean check2=dao.modify(Id6);
+			if(check2) {
+				System.out.println("modified..");
+			}
+			else {
+				System.out.println("Productid not present");
+			}
+			break;
+			case 6:Home.main();
+			      break;
+			}
+
+	}
+
+}

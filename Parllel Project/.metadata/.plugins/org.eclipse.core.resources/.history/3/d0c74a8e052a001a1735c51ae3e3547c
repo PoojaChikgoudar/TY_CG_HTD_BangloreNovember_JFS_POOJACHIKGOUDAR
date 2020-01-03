@@ -1,0 +1,15 @@
+package com.capgemini.hybernet.dao;
+
+import java.util.List;
+
+import com.capgemini.jdbc.bean.LandBean;
+
+public interface LandDao {
+	public List<LandBean> getAllLandDetails();
+	public boolean delete(int landId);
+	public boolean add(LandBean bean);
+	public boolean modify(int landId,LandBean bean);
+	
+
+
+}

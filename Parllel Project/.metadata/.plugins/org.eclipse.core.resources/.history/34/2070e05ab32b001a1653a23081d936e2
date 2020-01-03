@@ -1,0 +1,157 @@
+package com.capgemini.jdbc.dao;
+
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import com.capgemini.jdbc.bean.ContractBean;
+import com.capgemini.jdbc.bean.CustomerBean;
+
+public class CustomerDAOImpl implements CustomerDAO {
+	FileReader reader;
+	Properties prop;
+	CustomerBean user;
+	public  CustomerDAOImpl() {
+		try {
+			
+			reader=new FileReader("db1.properties");
+			prop=new Properties();
+			prop.load(reader);
+			
+			
+			
+			Class.forName(prop.getProperty("driverClass"));
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+
+	
+	
+
+	@Override
+	public boolean modify(int customerId,CustomerBean bean) {
+		try(Connection con=DriverManager.getConnection(prop.getProperty("dburl"),
+				prop.getProperty("dbUser"),prop.getProperty("dbpassword"));
+		
+				PreparedStatement pstmt=con.prepareStatement(prop.getProperty("updatequery")))
+		{
+				pstmt.setInt(8, customerId);
+				pstmt.setString(1,bean.getCustomerName());
+				pstmt.setString(2,bean.getStreetAdress1());
+				pstmt.setString(3,bean.getStreetAdress2());
+				pstmt.setString(4,bean.getTown());
+				pstmt.setInt(5,bean.getPostalCode());
+				pstmt.setString(6,bean.getEmail());
+				pstmt.setLong(7,bean.getTelephoneNumber());
+				
+				
+				
+				int count=pstmt.executeUpdate();
+				
+				if(count>0) {
+					return true;
+				}
+				}catch(Exception e) {
+				 e.printStackTrace();
+				}
+		return false;
+	}
+
+	@Override
+	public boolean add(CustomerBean user) {
+		// TODO Auto-generated method stub
+		try(Connection con=DriverManager.getConnection(prop.getProperty("dburl"),
+				prop.getProperty("dbUser"),prop.getProperty("dbpassword"));
+		
+				PreparedStatement pstmt=con.prepareStatement(prop.getProperty("insertQuery")))
+		{
+			pstmt.setInt(1, user.getCustomerId());
+			pstmt.setString(2, user.getCustomerName());
+			pstmt.setString(3,user.getStreetAdress1());
+			pstmt.setString(4, user.getStreetAdress2());
+			pstmt.setString(5, user.getTown());
+			pstmt.setInt(6, user.getPostalCode());
+			pstmt.setString(7, user.getEmail());
+			pstmt.setLong(8, user.getTelephoneNumber());
+			
+			
+				
+				int count=pstmt.executeUpdate();
+				
+				if(count>0) {
+					return true;
+				}
+				}catch(Exception e) {
+					System.out.println("Duplicate id");
+				}
+		return false;
+	}
+
+	@Override
+	public boolean deleteUser(int customerId) {
+		try(Connection con=DriverManager.getConnection(prop.getProperty("dburl"),
+				prop.getProperty("dbUser"),prop.getProperty("dbpassword"));
+		
+				PreparedStatement pstmt=con.prepareStatement(prop.getProperty("deletequery")))
+		{
+			pstmt.setInt(1,customerId);
+			
+			
+			
+			
+				
+				int count=pstmt.executeUpdate();
+				
+				if(count>0) {
+					return true;
+				}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+		return false;
+	
+	}
+
+
+
+
+	@Override
+	public List<CustomerBean> getAllCustomers() {
+
+		List<CustomerBean> list=new ArrayList<CustomerBean>();
+		try(Connection con=DriverManager.getConnection(prop.getProperty("dburl"),(prop.getProperty("dbUser")),
+				(prop.getProperty("dbpassword")));
+				Statement stmt=con.createStatement();
+				ResultSet rs=stmt.executeQuery(prop.getProperty("query1"))){
+			while(rs.next())	{
+				CustomerBean customer=new CustomerBean();
+				customer.setCustomerId(rs.getInt(1));
+				customer.setCustomerName(rs.getString(2));
+				customer.setStreetAdress1(rs.getString(3));
+				customer.setStreetAdress2(rs.getString(4));
+				customer.setTown(rs.getString(5));
+				customer.setPostalCode(rs.getInt(6));
+				customer.setEmail(rs.getString(7));
+				customer.setTelephoneNumber(rs.getLong(8));
+				list.add(customer);
+			}
+			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		
+		
+		return null;
+	}
+
+}

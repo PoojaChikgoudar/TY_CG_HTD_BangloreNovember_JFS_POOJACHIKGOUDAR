@@ -1,0 +1,32 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.Scanner;
+
+public class CustHome {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("******Welcome******");
+			System.out.println("Enter the choice");
+			System.out.println("1.Contract");
+			System.out.println("2.Order");
+			
+			
+			int choice=sc.nextInt();
+			switch(choice) {
+			case 1:ContractMain.main();
+			break;
+			case 2:OrderMain.main();
+			break;
+			
+			}
+			
+			
+			
+		}
+	  
+
+	}
+
+}

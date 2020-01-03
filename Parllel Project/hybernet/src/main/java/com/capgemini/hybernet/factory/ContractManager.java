@@ -1,0 +1,22 @@
+package com.capgemini.hybernet.factory;
+
+import com.capgemini.hybernet.dao.ContractDao;
+import com.capgemini.hybernet.dao.ContractDaoImpl;
+
+import com.capgemini.hybernet.service.ContractService;
+import com.capgemini.hybernet.service.ContractServiceImpl;
+
+public class ContractManager {
+	public static ContractDao instanceOfContractDaoImpl() {
+		ContractDao dao= new ContractDaoImpl();
+		return dao;
+		
+	}
+	public static ContractService instanceOfContractService() {
+		ContractService service=new ContractServiceImpl();
+		 return service;
+		 
+		
+	}
+
+}

@@ -1,0 +1,36 @@
+package com.capgemini.forestmanagement.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.capgemini.forestrymanagement.bean.ContractBean;
+import com.capgemini.forestrymanagement.bean.LandBean;
+
+public class LandDAOImpl implements LandDAO{
+	List<ContractBean> beans=new ArrayList<ContractBean>();
+
+	@Override
+	public List<LandBean> getAllContracts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteContract(int contractNo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addContract(LandBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modify(int contractNO) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

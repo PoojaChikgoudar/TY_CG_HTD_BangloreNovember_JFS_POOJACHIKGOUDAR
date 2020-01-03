@@ -1,0 +1,5 @@
+package com.capgemini.forestmanagement.dao;
+
+public interface AdminDAO {
+
+}

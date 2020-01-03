@@ -1,0 +1,130 @@
+package com.capgemini.jdbc.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.jdbc.bean.ContractBean;
+import com.capgemini.jdbc.bean.CustomerBean;
+import com.capgemini.jdbc.dao.CustomerDAO;
+import com.capgemini.jdbc.factory.CustomerDAOManager;
+import com.mysql.jdbc.services.CustomerService;
+
+
+
+public class CustomerMain {
+		public static void main() {
+			 CustomerService service=CustomerDAOManager.instanceOfCustomerService();
+			 CustomerBean user=new CustomerBean();
+			Scanner sc=new Scanner(System.in);
+			while(true) {
+				System.out.println("1.List all customers");
+				System.out.println("2.insert customer details");
+				System.out.println("3.delete customer details");
+				System.out.println("4.update customer details");
+				System.out.println("5.home");
+
+				int ch=sc.nextInt();
+				switch(ch) {
+				case 1:
+					  List<CustomerBean> list=service.getAllCustomers();
+					  if(list!=null) {
+						  for(CustomerBean customer:list) {
+							  System.out.println(customer);
+						  }
+					  }
+					break;
+				
+				case 2:
+				CustomerBean bean=new CustomerBean();
+				try {
+				System.out.println("enter customer id");
+				int customerId=sc.nextInt();
+				}
+				catch(Exception e) {
+					System.out.println("Id already exists");
+				}
+				System.out.println("enter customer name");
+				String customerName=sc.next();
+				System.out.println("enter street adress1");
+				String streetAdress1=sc.next();
+				System.out.println("enter street adress2");
+				String streetAdress2=sc.next();
+				System.out.println("enter customer town");
+				String town=sc.next();
+				System.out.println("enter postal code");
+				int postalCode=sc.nextInt();
+				System.out.println("enter customer email");
+				String email =sc.next();
+				System.out.println("enter customer telephone");
+				long telephoneNumber=sc.nextLong();
+				
+				bean.setCustomerId(customerId);
+				bean.setCustomerName(customerName);
+				bean.setStreetAdress1(streetAdress1);
+				bean.setStreetAdress2(streetAdress2);
+				bean.setTown(town);
+				bean.setPostalCode(postalCode);
+				bean.setEmail(email);
+				bean.setTelephoneNumber(telephoneNumber);
+
+				boolean check=service.add(bean);
+				if(check==true) {
+					System.out.println("customer added to list");
+				}
+				else {
+
+					System.out.println("customer id is repeated");
+				}
+				break;
+				
+				
+				case 3:System.out.println("Enter the customer_id to delete");
+				int id=sc.nextInt();
+				
+				boolean check1=service.deleteUser(id);
+				if(check1) {
+					System.out.println("Deleted..");
+				}
+				else {
+					System.out.println("customer_id is not present");
+				}
+				break;
+				case 4:System.out.println("enter the customerid");
+				int id1=sc.nextInt();
+				CustomerBean bean1=new CustomerBean();
+			    System.out.println("enter name to be modified");
+				bean1.setCustomerName(sc.next());
+				System.out.println("enter streetname1 to be modified");
+				bean1.setStreetAdress1(sc.next());
+				System.out.println("enter streetname2 to be modified");
+				bean1.setStreetAdress2(sc.next());
+				System.out.println("enter town to be modified");
+				bean1.setTown(sc.next());
+				System.out.println("enter postalcode to be modified");
+				bean1.setPostalCode(sc.nextInt());
+				
+				System.out.println("enter the telephone number to be modified");
+				bean1.setTelephoneNumber(sc.nextLong());
+				System.out.println("enter email to be modified");
+				bean1.setEmail(sc.next());
+				
+				
+				boolean check2=service.modify(id1,bean1);
+				if(check2) {
+					System.out.println("modified..");
+				}
+				else {
+					System.out.println("Enter the correct customerid");
+				}
+				break;
+				case 5:Home.main();
+				    break;
+				}
+			}
+
+
+		} 
+
+	}
+
+

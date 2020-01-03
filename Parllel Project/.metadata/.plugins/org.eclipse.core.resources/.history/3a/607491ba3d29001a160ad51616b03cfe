@@ -1,0 +1,200 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.capgemini.forestmanagement.dao.ContractDAO;
+import com.capgemini.forestmanagement.factory.ContractDAOManager;
+import com.capgemini.forestrymanagement.bean.ContractBean;
+import com.capgemini.forestrymanagement.bean.CustomerBean;
+
+public class ContractMain {
+
+	public static void main() {
+		// TODO Auto-generated method stub
+		ContractDAO dao=ContractDAOManager.getForestDAO();
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("1.Insert contract details");
+			System.out.println("2.delete contract");
+			System.out.println("3.showAll Contract ");
+			System.out.println("4.Client Home");
+			System.out.println("5.Admain page");
+
+			int ch=sc.nextInt();
+			switch(ch) {
+			
+			case 1:ContractBean  bean1=new ContractBean();
+				
+			
+			
+			
+			boolean idmatcher;
+			do {
+				System.out.println("enter contract no");
+			System.out.println("Id should contain 4 numbers..");
+			int contractNo=sc.nextInt();
+			String id1=Integer.toString(contractNo);
+			String idregexpr="^[1-9][0-9]{3}$";
+			idmatcher=id1.matches(idregexpr);
+			
+			if(!idmatcher) 
+				System.out.println("Invalid id");
+				
+			
+			else {
+				bean1.setContractNo(contractNo);
+			}
+			}while(!idmatcher);
+			
+			
+			
+			boolean idmatcher1;
+			do {
+				System.out.println("enter customer id");
+			System.out.println("Id should contain 4 numbers..");
+			int customerId=sc.nextInt();
+			String id2=Integer.toString(customerId);
+			String idregexpr1="^[1-9][0-9]{3}$";
+			idmatcher1=id2.matches(idregexpr1);
+			
+			if(!idmatcher1) 
+				System.out.println("Invalid id");
+				
+			
+			else {
+				bean1.setContractNo(customerId);
+			}
+			}while(!idmatcher1);
+			boolean idmatcher3;
+			do {
+				System.out.println("enter prouctid");
+			System.out.println("Id should contain 4 numbers..");
+			int productId=sc.nextInt();
+			String id1=Integer.toString(productId);
+			String idregexpr="^[1-9][0-9]{3}$";
+			idmatcher3=id1.matches(idregexpr);
+			
+			if(!idmatcher3) 
+				System.out.println("Invalid id");
+				
+			
+			else {
+				bean1.setProductId(productId);
+			}
+			}while(!idmatcher3);
+			
+			
+			boolean idmatcher4;
+			do {
+				System.out.println("enter haulier id");
+			System.out.println("Id should contain 4 numbers..");
+			int haulierId=sc.nextInt();
+			String id3=Integer.toString(haulierId);
+			String idregexpr3="^[1-9][0-9]{3}$";
+			idmatcher4=id3.matches(idregexpr3);
+			
+			if(!idmatcher4) 
+				System.out.println("Invalid id");
+				
+			
+			else {
+				bean1.setHaulierId(haulierId);
+			}
+			}while(!idmatcher4);
+			
+			
+			
+			
+
+			boolean datematcher;
+			do {
+				System.out.println("enter delivery date in yyyy-mm-dd format");
+			System.out.println("Id should contain 4 numbers..");
+			String deliveryDate=sc.next();
+			
+			String reg="\\d{4}-\\d{2}-\\d{2}";
+			datematcher=deliveryDate.matches(reg);
+			
+			if(!datematcher) 
+				System.out.println("Invalid id");
+				
+			
+			else {
+				bean1.setDeliveryDate(deliveryDate);
+			}
+			}while(!datematcher);
+			
+			System.out.println("enter deliveryday");
+			String deliveryDay=sc.next();
+			
+			
+			
+			
+			boolean idmatchers;
+			do {
+				System.out.println("enter quantity");
+			
+			int quantity=sc.nextInt();
+			String id4=Integer.toString(quantity);
+			String idregexpr4="^[0-9]{0,9999999999}$";
+			idmatchers=id4.matches(idregexpr4);
+			
+			if(!idmatchers) 
+				System.out.println("Invalid id");
+				
+			
+			else {
+				bean1.setQuantity(quantity);
+			}
+			}while(!idmatchers);
+			
+			
+			
+			
+			bean1.setDeliveryDay(deliveryDay);
+			
+
+			boolean check=dao.addContract(bean1);
+			if(check) {
+				System.out.println("contract added to list");
+			}
+			else {
+
+				System.out.println("contractno  repeated");
+			}
+			break;
+			
+			
+			case 2:System.out.println("Enter the contractno to delete");
+			int contractNo1=sc.nextInt();
+			
+			if(dao.deleteContract(contractNo1)) {
+				System.out.println("Deleted..");
+			}
+			else {
+				System.out.println("Contractno not present");
+			}
+			break;
+			case 3:
+				List<ContractBean> forestbean3=dao.getAllContracts();
+				if(forestbean3!=null) {
+					System.out.println(forestbean3);
+				}
+				else {
+					System.out.println("contract details not found");
+				}
+				break;
+			case 4:ClientHome.main();
+			     break;
+			case 5:AdminMain.main();
+			break;
+			}
+		}
+
+
+	}
+
+}

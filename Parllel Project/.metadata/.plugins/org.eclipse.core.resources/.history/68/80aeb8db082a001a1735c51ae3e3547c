@@ -1,0 +1,20 @@
+package com.capgemini.hybernet.factory;
+
+import com.capgemini.hybernet.dao.CustomerDao;
+import com.capgemini.hybernet.dao.CustomerDaoImpl;
+
+
+public class CustomerManager {
+	public static CustomerDao instanceOfCustomerDAOImpl() {
+		CustomerDao dao= new CustomerDaoImpl();
+		return dao;
+		
+	}
+	public static CustomerService instanceOfCustomerService() {
+		 CustomerService service=new CustomerServiceImpl();
+		 return service;
+		 
+		
+	}
+
+}

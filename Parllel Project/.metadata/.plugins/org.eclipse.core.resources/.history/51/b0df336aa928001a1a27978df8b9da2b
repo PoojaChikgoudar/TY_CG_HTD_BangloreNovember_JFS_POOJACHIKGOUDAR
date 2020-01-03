@@ -1,0 +1,132 @@
+package com.capgemini.forestmanagement.dao;
+
+
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+
+import com.capgemini.forestManagementSystem.controller.CustomerMain;
+import com.capgemini.forestrymanagement.bean.AdminBean;
+import com.capgemini.forestrymanagement.bean.CustomerBean;
+
+
+public class  CustomerDAOImpl implements CustomerDAO {
+	private List<CustomerBean> beans=new ArrayList<CustomerBean>();
+	Scanner sc=new Scanner(System.in);
+	@Override
+	public List<CustomerBean> getAllCustomers() {
+
+		return beans;
+	}
+
+	@Override
+	public CustomerBean getCustomer(int customerId) {
+		for(CustomerBean customerbean:beans) {
+			if(customerbean.getCustomerId()==customerId) {
+				return customerbean;
+			}
+
+		}
+
+		return null;
+	}
+
+	@Override
+	public boolean deleteCustomer(int customerId) throws InputMismatchException {
+		for(CustomerBean customerbean:beans) {
+			CustomerBean bean=null;
+			if(customerbean.getCustomerId()==customerId) {
+				bean=customerbean;
+
+			}
+
+			if(bean!=null) {
+				beans.remove(bean);
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	@Override
+	public boolean addCustomer(CustomerBean bean) {
+		for(CustomerBean forestbean:beans) {
+			if(forestbean.getCustomerId()==bean.getCustomerId())
+			{
+				return false;
+			}
+		}
+		beans.add(bean);
+		return true;
+	}
+
+	@Override
+	public boolean modify(int customerId) {
+		for(CustomerBean customerBean:beans) {
+		if(customerBean.getCustomerId()==customerId) {
+			
+			System.out.println("choose feild to be modified\n1.Customername\n2.street1\n3.sreet2\n4.town\n5.postalcode\n6.email\n7.telephonenumber\n8.CustomerMain\n");
+			int c=sc.nextInt();
+			switch(c) {
+			case 1:System.out.println("enter name to be modified");
+			customerBean.setCustomerName(sc.next());
+			break;
+			case 2:System.out.println("enter streetname1 to be modified");
+			customerBean.setStreetAdress1(sc.next());
+			break;
+			case 3:System.out.println("enter streetname2 to be modified");
+			customerBean.setStreetAdress2(sc.next());
+			break;
+			case 4:System.out.println("enter town to be modified");
+			customerBean.setTown(sc.next());
+			break;
+			case 5:System.out.println("enter postalcode to be modified");
+			customerBean.setPostalCode(sc.nextInt());
+			break;
+			case 6:System.out.println("enter email to be modified");
+			customerBean.setEmail(sc.next());
+			break;
+			case 7:System.out.println("Enter the telephone number to be modified");
+			customerBean.setTelephoneNumber(sc.nextLong());
+			break;
+			case 8:CustomerMain.main();
+			 break;
+			
+			default:
+				break;
+			}
+			
+			}
+			
+		
+		
+		return true;
+		
+		
+	}
+		return false;
+	}
+
+	@Override
+	public boolean customerLogin(CustomerBean bean) {
+		
+		
+			 for(CustomerBean customer:beans)
+			 {
+				 if(customer.getCustomerId()==bean.getCustomerId())
+				 {
+					 return false;
+				 }
+			 
+			 }
+			 beans.add(bean);
+		
+			
+			return true;
+		
+	}
+		
+	
+}

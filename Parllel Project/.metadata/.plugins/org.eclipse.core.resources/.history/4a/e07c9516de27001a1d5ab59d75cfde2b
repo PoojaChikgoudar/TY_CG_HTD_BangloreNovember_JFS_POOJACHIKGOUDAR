@@ -1,0 +1,11 @@
+package com.capgemini.forestmanagement.dao;
+
+public class AdminDAOImpl implements AdminDAO  {
+
+	@Override
+	public boolean adminLogin(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

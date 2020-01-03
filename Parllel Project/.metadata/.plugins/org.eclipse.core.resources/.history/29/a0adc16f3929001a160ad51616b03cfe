@@ -1,0 +1,207 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.capgemini.forestmanagement.dao.HaulierDAO;
+
+import com.capgemini.forestmanagement.factory.HaulierFactory;
+
+import com.capgemini.forestrymanagement.bean.HaulierBean;
+
+public class HaulierMain {
+
+	public static void main() {
+		// TODO Auto-generated method stub
+		HaulierDAO dao=HaulierFactory.getHaulierDAO();
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("Enter the Choice");
+			System.out.println("1.insert haulier details");
+			System.out.println("2.search haulier details");
+			System.out.println("3.getdetails of haulier");
+			System.out.println("4.delete haulier details");
+			System.out.println("5.modify");
+			System.out.println("6.home");
+
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:HaulierBean  bean=new HaulierBean();
+				
+			
+			boolean idmatcher1;
+			do {
+				System.out.println("enter haulier id");
+			System.out.println("Id should contain 4 numbers..");
+			int haulierid1=sc.nextInt();
+			String id2=Integer.toString(haulierid1);
+			String idregexpr1="^[1-9][0-9]{3}$";
+			idmatcher1=id2.matches(idregexpr1);
+			
+			if(!idmatcher1) 
+				System.out.println("Invalid id");
+				
+			
+			else {
+				bean.setHaulier_id(haulierid1);
+			}
+			}while(!idmatcher1);
+			
+			
+			
+			boolean flag;
+			do {
+				String nameregexpr="^[A-Z][a-z]*";
+				System.out.println("enter haulier name");
+			System.out.println("Enter the name in capitalised format");
+			String haulerName=sc.next();
+			flag=haulerName.matches(nameregexpr);
+			if(!flag)
+				System.out.println("Invalid...Please Enter alphabets only");
+			else {
+			   bean.setHaulier_name(haulerName);
+			}
+			}while(!flag);
+			
+			
+			
+			
+			boolean addmatcher;
+			do {
+				System.out.println("enter  adress");
+			String adress=sc.next();
+			
+			String regexp="^[0-9A-Za-z]*";
+			
+			 addmatcher=adress.matches(regexp);
+			
+			if(!addmatcher) 
+				System.out.println("Invalid adress");
+			
+				
+			else {
+				bean.setAdress(adress);
+				
+				}
+			}while(!addmatcher);
+			
+			
+			
+		
+			boolean emailmatcher;
+			do {
+			System.out.println("enter haulier email");
+			String email =sc.next();
+				
+			String email1="^(.+)@(.+)$";
+			emailmatcher=email.matches(email1);
+			
+			if(!emailmatcher) 
+				System.out.println("Invalid Email");
+			
+				
+			else {
+				bean.setEmail(email);
+				
+				}
+
+				}while(!emailmatcher);
+			
+			
+			
+			boolean nummatcher;
+			do {
+			System.out.println("enter haulier telephone");
+			long telephoneNumber=sc.nextLong();
+			String num=Long.toString(telephoneNumber);
+			String phoneNumber="^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$";
+			nummatcher=num.matches(phoneNumber);
+			
+			if(!nummatcher) 
+				System.out.println("Invalid number...");
+			
+				
+			
+			
+			
+			else {
+				bean.setTelephone(telephoneNumber);
+				
+
+				}
+			}
+			while(!nummatcher);
+			
+			
+			
+		
+
+			boolean check=dao.add(bean);
+			if(check) {
+				System.out.println("haulier added to list");
+			}
+			else {
+
+				System.out.println("haulier id is repeated");
+			}
+			break;
+			case 2:System.out.println("enter haulierid to search");	
+			int haulierid1=sc.nextInt();
+
+			HaulierBean bean1=dao.gethaulier(haulierid1);
+			if(bean1!=null) {
+
+				System.out.println(bean1.getHaulier_id());
+				System.out.println(bean1.getHaulier_name());
+				System.out.println(bean1.getAdress());
+				System.out.println(bean1.getEmail());
+				System.out.println(bean1.getTelephone());
+				
+
+
+			}else {
+				System.out.println("haulierid not found");
+			}
+			break;
+			case 3:
+			List<HaulierBean> bean3=dao.getAllHaulier();
+			if(bean3!=null) {
+				System.out.println(bean3);
+			}
+			else {
+				System.out.println("haulier details not found");
+			}
+			break;
+			case 4:System.out.println("Enter the haulierid to delete");
+			int haulierid2=sc.nextInt();
+			boolean check1=dao.delete(haulierid2);
+			if(check1) {
+				System.out.println("Deleted..");
+			}
+			else {
+				System.out.println("Enter the valid haulierid");
+			}
+			break;
+			case 5:System.out.println("Enter the haulierid");
+			int haulierid3=sc.nextInt();
+			
+			boolean check2=dao.modify(haulierid3);
+			if(check2) {
+				System.out.println("modified..");
+			}
+			else {
+				System.out.println("enter the valid haulierid");
+			}
+			break;
+			case 6:Home.main();
+			      break;
+			}
+		}
+
+		
+
+	}
+
+}

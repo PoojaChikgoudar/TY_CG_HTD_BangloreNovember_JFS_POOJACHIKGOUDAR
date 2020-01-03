@@ -1,0 +1,17 @@
+package com.capgemini.forestmanagement.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.capgemini.forestrymanagement.bean.AdminBean;
+
+public class AdminDAOImpl implements AdminDAO  {
+
+	@Override
+	public boolean adminLogin(String username, String password) {
+		private static List<AdminBean> bean=new ArrayList<AdminBean>;
+		
+		return false;
+	}
+
+}

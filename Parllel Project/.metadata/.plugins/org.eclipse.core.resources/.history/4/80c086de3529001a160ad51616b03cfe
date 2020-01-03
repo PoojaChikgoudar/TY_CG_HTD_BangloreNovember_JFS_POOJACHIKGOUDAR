@@ -1,0 +1,5 @@
+package com.capgemini.forestmanagement.dao;
+
+public class SchedulerDaoImpl {
+
+}

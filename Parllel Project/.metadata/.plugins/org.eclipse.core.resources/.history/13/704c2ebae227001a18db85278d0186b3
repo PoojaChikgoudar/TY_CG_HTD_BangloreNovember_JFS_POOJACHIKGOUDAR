@@ -1,0 +1,39 @@
+package com.capgemini.forestManagementSystem.controller;
+
+import java.util.Scanner;
+
+import com.capgemini.forestmanagement.dao.AdminDAO;
+import com.capgemini.forestmanagement.factory.AdminManager;
+import com.capgemini.forestrymanagement.bean.AdminBean;
+
+public class AdminMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			System.out.println("Enter the choice");
+			System.out.println("1.Admin");
+			System.out.println("2.client");
+			System.out.println("3.scheduler");
+			System.out.println("4.Land");
+		int choice=sc.nextInt();
+		switch(choice) {
+		case 1:AdminDAO dao=AdminManager.getAdminDAO();
+		AdminBean bean=new AdminBean();
+		System.out.println("Enter the username");
+		String username=sc.next();
+		System.out.println("Enter the password");
+		String password=sc.next();
+		boolean check=dao.adminLogin(bean);
+		if(check) {
+			System.out.println("Admin login sucessfull..");
+		}
+		else {
+			System.out.println("Invalid credentials..");
+		}
+		}
+		}
+	}
+
+}
