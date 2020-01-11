@@ -1,7 +1,0 @@
-package snippet;
-
-public class Snippet {
-	boolean b=p.test(12);
-			System.out.println(b);
-}
-
